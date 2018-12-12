@@ -11,6 +11,17 @@ namespace Exercise.EntityFramework.Test
 {
     public class TestSetup
     {
+        public void SetUpDatabase()
+        {
+            DestroyDatabase();
+            CreateDatabase();
+        }
+
+        public void DeleteDatabase()
+        {
+            DestroyDatabase();
+        }
+
         private static void CreateDatabase()
         {
             ExecuteSqlCommand(Master, $@"
