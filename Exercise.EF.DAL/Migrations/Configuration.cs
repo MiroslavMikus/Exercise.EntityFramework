@@ -5,7 +5,7 @@ namespace Exercise.EF.DAL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MyContext>
+    public sealed class Configuration : DbMigrationsConfiguration<MyContext>
     {
         public Configuration()
         {
