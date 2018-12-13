@@ -48,6 +48,10 @@
     <Compile Include="Migrations\201812121207533_AddUser.Designer.cs">
       <DependentUpon>201812121207533_AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812132053124_Add cart.cs" />
+    <Compile Include="Migrations\201812132053124_Add cart.Designer.cs">
+      <DependentUpon>201812132053124_Add cart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\MyContext.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -61,6 +65,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812121207533_AddUser.resx">
       <DependentUpon>201812121207533_AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812132053124_Add cart.resx">
+      <DependentUpon>201812132053124_Add cart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

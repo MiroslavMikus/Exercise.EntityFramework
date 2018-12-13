@@ -30,5 +30,7 @@ namespace Exercise.EF.DAL.Migrations
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CatalogItem> CatalogItems { get; set; }
     }
 }
