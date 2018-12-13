@@ -46,7 +46,7 @@ namespace Exercise.EntityFramework.Test
             {
                 var detachDb = $"EXEC sp_detach_db '{dbFileName}'";
 
-                if (!File.Exists(dbFileName))
+                if (!File.Exists(Filename(dbFileName)))
                 {
                     ExecuteSqlCommand(Master, detachDb);
                 }

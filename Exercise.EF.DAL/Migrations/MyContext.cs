@@ -9,7 +9,11 @@ namespace Exercise.EF.DAL.Migrations
     public class MyContext : DbContext
     {
         public MyContext()
-            : base("MyContext")
+        {
+        }
+
+        public MyContext(string connectionString)
+            : base(connectionString)
         {
 
         }
