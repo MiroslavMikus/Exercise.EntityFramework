@@ -1,7 +1,9 @@
 ﻿using Exercise.EF.DAL.Migrations;
+using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -11,46 +13,53 @@ namespace Exercise.EntityFramework.Test
 {
     public class TestSetup
     {
-        public void SetUpDatabase()
+        public void SetUpDatabase(string dbFileName)
         {
-            DestroyDatabase();
-            CreateDatabase();
+            DestroyDatabase(dbFileName);
+            CreateDatabase(dbFileName);
         }
 
-        public void DeleteDatabase()
+        public void DeleteDatabase(string dbFileName)
         {
-            DestroyDatabase();
+            DestroyDatabase(dbFileName);
         }
 
-        private static void CreateDatabase()
+        internal static void CreateDatabase(string dbFileName)
         {
             ExecuteSqlCommand(Master, $@"
-                CREATE DATABASE [IntegrationTest]
-                ON (NAME = 'Globalmantics',
-                FILENAME = '{Filename}')");
+                CREATE DATABASE [{dbFileName}]
+                ON (NAME = '{dbFileName}',
+                FILENAME = '{Filename(dbFileName)}')");
 
             var migration = new MigrateDatabaseToLatestVersion<MyContext, Configuration>();
 
             migration.InitializeDatabase(new MyContext());
         }
 
-        private static void DestroyDatabase()
+        internal static void DestroyDatabase(string dbFileName)
         {
-            var fileNames = ExecuteSqlQuery(Master, @"
+            var fileNames = ExecuteSqlQuery(Master, $@"
                 SELECT [physical_name] FROM [sys].[master_files]
-                WHERE [database_id] = DB_ID('IntegrationTest')", row => (string)row["physical_name"]);
+                WHERE [database_id] = DB_ID('{dbFileName}')", row => (string)row["physical_name"]);
 
             if (fileNames.Any())
             {
-                ExecuteSqlCommand(Master, @"
-                    ALTER DATABASE [IntegrationTest] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                    EXEC sp_detach_db 'IntegrationTest'");
+                var detachDb = $"EXEC sp_detach_db '{dbFileName}'";
+
+                if (!File.Exists(dbFileName))
+                {
+                    ExecuteSqlCommand(Master, detachDb);
+                }
+                else
+                {
+                    ExecuteSqlCommand(Master, $"ALTER DATABASE [{dbFileName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;{detachDb}");
+                }
 
                 fileNames.ForEach(File.Delete);
             }
         }
 
-        private static void ExecuteSqlCommand(SqlConnectionStringBuilder connectionStringBuilder,
+        internal static void ExecuteSqlCommand(SqlConnectionStringBuilder connectionStringBuilder,
                                               string commandText)
         {
             using (var connection = new SqlConnection(connectionStringBuilder.ConnectionString))
@@ -64,7 +73,7 @@ namespace Exercise.EntityFramework.Test
             }
         }
 
-        private static List<T> ExecuteSqlQuery<T>(SqlConnectionStringBuilder connectionStringBuilder,
+        internal static List<T> ExecuteSqlQuery<T>(SqlConnectionStringBuilder connectionStringBuilder,
                                                   string queryText,
                                                   Func<SqlDataReader, T> read)
         {
@@ -87,7 +96,7 @@ namespace Exercise.EntityFramework.Test
             return result;
         }
 
-        private static SqlConnectionStringBuilder Master =>
+        internal static SqlConnectionStringBuilder Master =>
             new SqlConnectionStringBuilder
             {
                 DataSource = @"(LocalDB)\MSSQLLocalDB",
@@ -95,6 +104,6 @@ namespace Exercise.EntityFramework.Test
                 IntegratedSecurity = true
             };
 
-        private static string Filename => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "IntegrationTest.mdf");
+        internal static string Filename(string dbFileName) => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), dbFileName + ".mdf");
     }
 }

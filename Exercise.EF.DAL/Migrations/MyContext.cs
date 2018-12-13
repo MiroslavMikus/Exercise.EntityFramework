@@ -25,6 +25,6 @@ namespace Exercise.EF.DAL.Migrations
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("IX_U_Email") { IsUnique = true }));
         }
 
-        public DbSet<User> Users { get; set; } 
+        public DbSet<User> Users { get; set; }
     }
 }
