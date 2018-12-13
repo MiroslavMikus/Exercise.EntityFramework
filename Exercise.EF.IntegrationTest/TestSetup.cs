@@ -29,8 +29,8 @@ namespace Exercise.EntityFramework.Test
                 ON (NAME = 'Globalmantics',
                 FILENAME = '{Filename}')");
 
-            var migration = new MigrateDatabaseToLatestVersion<
-                MyContext, Configuration>();
+            var migration = new MigrateDatabaseToLatestVersion<MyContext, Configuration>();
+
             migration.InitializeDatabase(new MyContext());
         }
 
@@ -38,8 +38,7 @@ namespace Exercise.EntityFramework.Test
         {
             var fileNames = ExecuteSqlQuery(Master, @"
                 SELECT [physical_name] FROM [sys].[master_files]
-                WHERE [database_id] = DB_ID('IntegrationTest')",
-                row => (string)row["physical_name"]);
+                WHERE [database_id] = DB_ID('IntegrationTest')", row => (string)row["physical_name"]);
 
             if (fileNames.Any())
             {
