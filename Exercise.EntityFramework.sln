@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EF.DAL", "Exercise
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{64BA6803-E96B-411D-9D0A-9FD0585C2A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EntityFramework.IntegrationTest", "Exercise.EntityFramework.IntegrationTest\Exercise.EntityFramework.IntegrationTest.csproj", "{38BB8A43-11D5-48D7-8A4C-CA227EE0F067}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EF.IntegrationTest", "Exercise.EF.IntegrationTest\Exercise.EF.IntegrationTest.csproj", "{38BB8A43-11D5-48D7-8A4C-CA227EE0F067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EntityFramework.Logic", "Exercise.EntityFramework.Logic\Exercise.EntityFramework.Logic.csproj", "{0D731C0F-91E9-40C5-834A-5DDF96091E4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EF.Logic", "Exercise.EF.Logic\Exercise.EF.Logic.csproj", "{0D731C0F-91E9-40C5-834A-5DDF96091E4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -66,7 +66,7 @@
       <Project>{75a7fedc-7248-4af3-8a73-98f902d81b8d}</Project>
       <Name>Exercise.EF.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Exercise.EntityFramework.Logic\Exercise.EntityFramework.Logic.csproj">
+    <ProjectReference Include="..\Exercise.EF.Logic\Exercise.EF.Logic.csproj">
       <Project>{0d731c0f-91e9-40c5-834a-5ddf96091e4c}</Project>
       <Name>Exercise.EntityFramework.Logic</Name>
     </ProjectReference>
