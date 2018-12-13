@@ -5,6 +5,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Exercise.EntityFramework.Test
 {
@@ -38,10 +39,19 @@ namespace Exercise.EntityFramework.Test
             _setup.DeleteDatabase(_name);
         }
 
+        private MyContext CreateContext()
+        {
+            var context = new MyContext(_connection);
+
+            context.Database.BeginTransaction();
+
+            return context;
+        }
+
         [TestMethod]
         public void GetUserByEmail()
         {
-            using (var context = new MyContext(_connection))
+            using (var context = CreateContext())
             {
                 var userService = new UserService(context);
 
@@ -52,6 +62,31 @@ namespace Exercise.EntityFramework.Test
                 user.UserId.Should().NotBe(0);
 
                 user.Email.Should().Be("test@email.com");
+            }
+        }
+
+        [TestMethod]
+        public void UserShouldNotExist()
+        {
+            using (var context = CreateContext())
+            {
+                var userService = new UserService(context);
+
+                User user = userService.GetUserByEmail("test@email.com");
+
+                context.SaveChanges();
+
+                user.UserId.Should().NotBe(0);
+
+                user.Email.Should().Be("test@email.com");
+            }
+
+            // since we are using transactions, the users table should be still empty
+            using (var context = CreateContext())
+            {
+                var users = context.Users.ToList();
+
+                users.Should().BeEmpty();
             }
         }
     }

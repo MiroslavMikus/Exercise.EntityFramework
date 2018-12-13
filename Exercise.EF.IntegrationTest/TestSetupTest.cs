@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 
-
 namespace Exercise.EntityFramework.Test
 {
     [TestClass]
@@ -26,6 +25,13 @@ namespace Exercise.EntityFramework.Test
             setup.DeleteDatabase(name);
 
             Assert.IsFalse(File.Exists(file));
+        }
+
+        [TestMethod]
+        public void DeteteDb()
+        {
+            var setup = new TestSetup();
+            setup.DeleteDatabase("e6e5bbeb-b2d0-4954-9dac-6a80fb3f1edf");
         }
     }
 }

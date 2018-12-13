@@ -20,6 +20,7 @@ namespace Exercise.EF.DAL.Entities
             var cartItem = CartItems
                 .Where(x => x.CatalogItem == catalogItem)
                 .FirstOrDefault();
+
             if (cartItem == null)
             {
                 cartItem = CartItem.Create(catalogItem);
