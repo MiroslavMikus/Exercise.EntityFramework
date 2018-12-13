@@ -13,9 +13,9 @@ namespace Exercise.EntityFramework.Test
     {
         private static TestSetup _setup;
         private static string _name;
-        private static SqlConnectionStringBuilder _connection;
+        private static string _connection;
 
-        [AssemblyInitialize()]
+        [ClassInitialize()]
         public static void ClassInit(TestContext context)
         {
             _name = Guid.NewGuid().ToString();
@@ -29,10 +29,10 @@ namespace Exercise.EntityFramework.Test
                 DataSource = @"(LocalDB)\MSSQLLocalDB",
                 InitialCatalog = _name,
                 IntegratedSecurity = true
-            };
+            }.ConnectionString;
         }
 
-        [AssemblyCleanup()]
+        [ClassCleanup()]
         public static void ClassCleanup()
         {
             _setup.DeleteDatabase(_name);
@@ -41,9 +41,7 @@ namespace Exercise.EntityFramework.Test
         [TestMethod]
         public void GetUserByEmail()
         {
-            var test = _connection.ConnectionString.ToString();
-
-            using (var context = new MyContext(_connection.ConnectionString))
+            using (var context = new MyContext(_connection))
             {
                 var userService = new UserService(context);
 
@@ -52,6 +50,7 @@ namespace Exercise.EntityFramework.Test
                 context.SaveChanges();
 
                 user.UserId.Should().NotBe(0);
+
                 user.Email.Should().Be("test@email.com");
             }
         }
