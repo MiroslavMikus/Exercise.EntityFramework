@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestSetup.cs" />
+    <Compile Include="TempDatabase.cs" />
     <Compile Include="TestSetupTest.cs" />
     <Compile Include="UserServiceTest.cs" />
   </ItemGroup>

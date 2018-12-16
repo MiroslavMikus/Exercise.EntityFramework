@@ -2,20 +2,17 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Annotations;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Exercise.EF.DAL.Migrations
 {
     public class MyContext : DbContext
     {
-        public MyContext()
-        {
-        }
-
         public MyContext(string connectionString)
             : base(connectionString)
         {
-
+            Database.SetInitializer(new MigrateInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

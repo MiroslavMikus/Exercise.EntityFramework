@@ -11,15 +11,33 @@ using System.Reflection;
 
 namespace Exercise.EntityFramework.Test
 {
-    public class TestSetup
+    public class TempDatabase : IDisposable
     {
-        public void SetUpDatabase(string dbFileName)
+        public string ConnectionString { get; private set; }
+
+        public string DatabaseName { get; private set; }
+
+        public TempDatabase(string databaseName = null)
+        {
+            DatabaseName = databaseName ?? Guid.NewGuid().ToString();
+
+            SetUpDatabase(DatabaseName);
+
+            ConnectionString = new SqlConnectionStringBuilder
+            {
+                DataSource = @"(LocalDB)\MSSQLLocalDB",
+                InitialCatalog = DatabaseName,
+                IntegratedSecurity = true
+            }.ConnectionString;
+        }
+
+        internal void SetUpDatabase(string dbFileName)
         {
             DestroyDatabase(dbFileName);
             CreateDatabase(dbFileName);
         }
 
-        public void DeleteDatabase(string dbFileName)
+        internal void DeleteDatabase(string dbFileName)
         {
             DestroyDatabase(dbFileName);
         }
@@ -30,10 +48,6 @@ namespace Exercise.EntityFramework.Test
                 CREATE DATABASE [{dbFileName}]
                 ON (NAME = '{dbFileName}',
                 FILENAME = '{Filename(dbFileName)}')");
-
-            var migration = new MigrateDatabaseToLatestVersion<MyContext, Configuration>();
-
-            migration.InitializeDatabase(new MyContext());
         }
 
         internal static void DestroyDatabase(string dbFileName)
@@ -105,5 +119,10 @@ namespace Exercise.EntityFramework.Test
             };
 
         internal static string Filename(string dbFileName) => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), dbFileName + ".mdf");
+
+        public void Dispose()
+        {
+            DestroyDatabase(DatabaseName);
+        }
     }
 }

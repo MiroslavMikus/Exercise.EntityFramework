@@ -1,6 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Exercise.EF.DAL.Migrations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
+using System.Linq;
 
 namespace Exercise.EntityFramework.Test
 {
@@ -14,24 +18,28 @@ namespace Exercise.EntityFramework.Test
 
             Assert.IsFalse(File.Exists(name));
 
-            var setup = new TestSetup();
+            var file = TempDatabase.Filename(name);
 
-            setup.SetUpDatabase(name);
+            using (var database = new TempDatabase(name))
+            {
+                Assert.IsTrue(File.Exists(file));
 
-            var file = TestSetup.Filename(name);
+                var context = new MyContext(database.ConnectionString);
 
-            Assert.IsTrue(File.Exists(file));
-
-            setup.DeleteDatabase(name);
+                var test = context.Users.ToList();
+            }
 
             Assert.IsFalse(File.Exists(file));
         }
 
         [TestMethod]
+        [Ignore]
         public void DeteteDb()
         {
-            var setup = new TestSetup();
-            setup.DeleteDatabase("e6e5bbeb-b2d0-4954-9dac-6a80fb3f1edf");
+            using (var setup = new TempDatabase())
+            {
+                setup.DeleteDatabase("c26fd39d-7a5e-45bf-98e7-9130ef0dc465");
+            }
         }
     }
 }

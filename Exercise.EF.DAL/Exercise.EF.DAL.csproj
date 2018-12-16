@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextFactory.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\CartItem.cs" />
     <Compile Include="Entities\CatalogItem.cs" />
+    <Compile Include="MigrateInitializer.cs" />
     <Compile Include="Migrations\201812121207533_AddUser.cs" />
     <Compile Include="Migrations\201812121207533_AddUser.Designer.cs">
       <DependentUpon>201812121207533_AddUser.cs</DependentUpon>

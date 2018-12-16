@@ -12,7 +12,7 @@ namespace Exercise.EntityFramework.Test
     [TestClass]
     public class UserServiceTest
     {
-        private static TestSetup _setup;
+        private static TempDatabase _setup;
         private static string _name;
         private static string _connection;
 
@@ -21,7 +21,7 @@ namespace Exercise.EntityFramework.Test
         {
             _name = Guid.NewGuid().ToString();
 
-            _setup = new TestSetup();
+            _setup = new TempDatabase();
 
             _setup.SetUpDatabase(_name);
 
