@@ -74,7 +74,7 @@ namespace Exercise.EntityFramework.Test
         }
 
         internal static void ExecuteSqlCommand(SqlConnectionStringBuilder connectionStringBuilder,
-                                              string commandText)
+                                               string commandText)
         {
             using (var connection = new SqlConnection(connectionStringBuilder.ConnectionString))
             {
