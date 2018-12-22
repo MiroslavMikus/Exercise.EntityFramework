@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EF.DAL", "Exercise.EF.DAL\Exercise.EF.DAL.csproj", "{75A7FEDC-7248-4AF3-8A73-98F902D81B8D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{64BA6803-E96B-411D-9D0A-9FD0585C2A1D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{64BA6803-E96B-411D-9D0A-9FD0585C2A1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EF.IntegrationTest", "Exercise.EF.IntegrationTest\Exercise.EF.IntegrationTest.csproj", "{38BB8A43-11D5-48D7-8A4C-CA227EE0F067}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EF.Logic", "Exercise.EF.Logic\Exercise.EF.Logic.csproj", "{0D731C0F-91E9-40C5-834A-5DDF96091E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise.EntityFramework.Examples", "Exercise.EntityFramework.Examples\Exercise.EntityFramework.Examples.csproj", "{BD2E5F5E-A347-4B5E-AE7E-D3CC98022214}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +31,18 @@ Global
 		{0D731C0F-91E9-40C5-834A-5DDF96091E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D731C0F-91E9-40C5-834A-5DDF96091E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D731C0F-91E9-40C5-834A-5DDF96091E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2E5F5E-A347-4B5E-AE7E-D3CC98022214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2E5F5E-A347-4B5E-AE7E-D3CC98022214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2E5F5E-A347-4B5E-AE7E-D3CC98022214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2E5F5E-A347-4B5E-AE7E-D3CC98022214}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{75A7FEDC-7248-4AF3-8A73-98F902D81B8D} = {64BA6803-E96B-411D-9D0A-9FD0585C2A1D}
 		{38BB8A43-11D5-48D7-8A4C-CA227EE0F067} = {64BA6803-E96B-411D-9D0A-9FD0585C2A1D}
+		{0D731C0F-91E9-40C5-834A-5DDF96091E4C} = {64BA6803-E96B-411D-9D0A-9FD0585C2A1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {041D7CF1-77D1-4D37-9F05-6B015D0A48E1}
