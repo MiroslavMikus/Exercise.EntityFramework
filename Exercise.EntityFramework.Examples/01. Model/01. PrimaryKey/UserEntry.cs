@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Exercise.EntityFramework.Examples._01._Model._01._PrimaryKey
+namespace Exercise.EntityFramework.Examples.Model.PrimaryKey
 {
     /// <summary>
     /// Class with composite key.

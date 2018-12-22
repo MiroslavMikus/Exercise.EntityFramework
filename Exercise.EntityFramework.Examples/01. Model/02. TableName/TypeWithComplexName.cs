@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Exercise.EntityFramework.Examples._01._Model._02._TableName
+namespace Exercise.EntityFramework.Examples.Model.TableName
 {
     /// <summary>
     /// Attribute '[Table]' tells the Entity Framework to put this class to specified table.
