@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Exercise.EntityFramework.Patterns.Repository
 {
-    public class Repository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DbContext _context;
         private readonly DbSet<T> _dbSet;
