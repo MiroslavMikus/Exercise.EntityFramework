@@ -53,6 +53,7 @@
     <Compile Include="01. Model\04. Dependencies\03. ManyToMany.cs" />
     <Compile Include="01. Model\04. Dependencies\02. OneToMany.cs" />
     <Compile Include="01. Model\04. Dependencies\01. OneToOne.cs" />
+    <Compile Include="02. Context\SimpleContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +68,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="02. Context\" />
     <Folder Include="03. FluentAPI\" />
     <Folder Include="04. Migration\" />
   </ItemGroup>
