@@ -5,7 +5,7 @@ namespace Exercise.EntityFramework.Examples
 {
     public class TestContext : DbContext
     {
-        public TestContext() : base("temp_test")
+        public TestContext(string dbName) : base(dbName)
         {
 
         }

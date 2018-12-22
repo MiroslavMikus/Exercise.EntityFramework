@@ -1,5 +1,6 @@
 using Exercise.EntityFramework.Examples.Model.Dependencies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Exercise.EntityFramework.Examples
 {
@@ -9,21 +10,31 @@ namespace Exercise.EntityFramework.Examples
         [TestMethod]
         public void TestMethod1()
         {
-            using (var context = new TestContext())
+            using (var context = new TestContext("Temp_testDb"))
             {
                 var customer = new Customer()
                 {
-                    Name = "Miro"
+                    Name = "Miro",
+                    Orders = new List<Order>
+                    {
+                        new Order
+                        {
+                            ItemName = "notebook"
+                        }
+                    }
                 };
+
+                context.Customers.Add(customer);
+
+                context.SaveChanges();
 
                 var order = new Order
                 {
+                    ItemName = "Pen",
                     Customer = customer
                 };
 
                 context.Orders.Add(order);
-
-                context.SaveChanges();
             }
         }
     }

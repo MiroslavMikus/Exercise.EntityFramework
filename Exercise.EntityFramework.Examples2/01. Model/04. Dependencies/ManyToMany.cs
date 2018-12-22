@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Exercise.EntityFramework.Examples.Model.Dependencies
+namespace Exercise.EntityFramework.Examples._01._Model._04._Dependencies
 {
     public class Student
     {
