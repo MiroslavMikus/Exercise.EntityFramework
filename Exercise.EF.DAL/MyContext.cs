@@ -12,7 +12,7 @@ namespace Exercise.EF.DAL.Migrations
         public MyContext(string connectionString)
             : base(connectionString)
         {
-            Database.SetInitializer(new MigrateInitializer());
+            Database.SetInitializer(new MigrateInitializer(connectionString));
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
