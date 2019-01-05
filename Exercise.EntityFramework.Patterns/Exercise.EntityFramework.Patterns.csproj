@@ -48,6 +48,9 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\LazyUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\SimpleUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">
