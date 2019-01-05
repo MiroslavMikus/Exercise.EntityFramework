@@ -14,7 +14,7 @@ namespace Exercise.EntityFramework.Logic
             _context = context;
         }
 
-        public User GetUserByEmail(string email)
+        public User AddUser(string email)
         {
             return _context.Users.Add(new User { Email = email });
         }
