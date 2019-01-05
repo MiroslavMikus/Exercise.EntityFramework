@@ -10,7 +10,7 @@ namespace Exercise.EntityFramework.Patterns.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DbContext _context;
+        protected readonly DbContext _context;
         private readonly DbSet<T> _dbSet;
 
         public Repository(DbContext context)
@@ -27,6 +27,7 @@ namespace Exercise.EntityFramework.Patterns.Repository
         public T FindByKey(int id) => _dbSet.Find(id);
 
         public T Insert(T entity) => _dbSet.Add(entity);
+
         public void Update(T entity)
         {
             _dbSet.Attach(entity);
