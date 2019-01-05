@@ -14,7 +14,6 @@ namespace Exercise.EntityFramework.Test
     {
         private static TempDatabase _setup;
         private static string _name;
-        private static string _connection;
 
         [ClassInitialize()]
         public static void ClassInit(TestContext context)
@@ -22,40 +21,36 @@ namespace Exercise.EntityFramework.Test
             _name = Guid.NewGuid().ToString();
 
             _setup = new TempDatabase();
-
-            _setup.SetUpDatabase(_name);
-
-            _connection = new SqlConnectionStringBuilder
-            {
-                DataSource = @"(LocalDB)\MSSQLLocalDB",
-                InitialCatalog = _name,
-                IntegratedSecurity = true
-            }.ConnectionString;
         }
 
         [ClassCleanup()]
         public static void ClassCleanup()
         {
-            _setup.DeleteDatabase(_name);
+            _setup.Dispose();
         }
 
-        private MyContext CreateContext()
+        private MyContext CreateContextWithTransaction(string connectionString)
         {
-            var context = new MyContext(_connection);
+            var context = new MyContext(connectionString);
 
             context.Database.BeginTransaction();
 
             return context;
         }
 
+        private MyContext CreateContext(string connectionString)
+        {
+            return new MyContext(connectionString);
+        }
+
         [TestMethod]
         public void GetUserByEmail()
         {
-            using (var context = CreateContext())
+            using (var context = CreateContextWithTransaction(_setup.ConnectionString))
             {
                 var userService = new UserService(context);
 
-                User user = userService.GetUserByEmail("test@email.com");
+                User user = userService.AddUser("test@email.com");
 
                 context.SaveChanges();
 
@@ -66,13 +61,37 @@ namespace Exercise.EntityFramework.Test
         }
 
         [TestMethod]
-        public void UserShouldNotExist()
+        public void UserShouldExist()
         {
-            using (var context = CreateContext())
+            using (var context = CreateContext(_setup.ConnectionString))
             {
                 var userService = new UserService(context);
 
-                User user = userService.GetUserByEmail("test@email.com");
+                User user = userService.AddUser("test@email.com");
+
+                context.SaveChanges();
+
+                user.UserId.Should().NotBe(0);
+
+                user.Email.Should().Be("test@email.com");
+            }
+
+            using (var context = CreateContext(_setup.ConnectionString))
+            {
+                var users = context.Users.ToList();
+
+                users.Should().NotBeEmpty();
+            }
+        }
+
+        [TestMethod]
+        public void UserShouldNotExist_TransactionTest()
+        {
+            using (var context = CreateContextWithTransaction(_setup.ConnectionString))
+            {
+                var userService = new UserService(context);
+
+                User user = userService.AddUser("test@email.com");
 
                 context.SaveChanges();
 
@@ -82,7 +101,7 @@ namespace Exercise.EntityFramework.Test
             }
 
             // since we are using transactions, the users table should be still empty
-            using (var context = CreateContext())
+            using (var context = CreateContextWithTransaction(_setup.ConnectionString))
             {
                 var users = context.Users.ToList();
 
