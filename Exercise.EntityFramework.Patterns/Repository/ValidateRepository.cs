@@ -46,6 +46,5 @@ namespace Exercise.EntityFramework.Patterns.Repository
 
             return new RepositoryValidationException(nameof(ValidateRepository<T>), errors.ToList());
         }
-
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="01. Model\04. Dependencies\02. OneToMany.cs" />
     <Compile Include="01. Model\04. Dependencies\01. OneToOne.cs" />
     <Compile Include="02. Context\SimpleContext.cs" />
+    <Compile Include="03. FluentAPI\ContextWithFluentApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +69,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="03. FluentAPI\" />
     <Folder Include="04. Migration\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

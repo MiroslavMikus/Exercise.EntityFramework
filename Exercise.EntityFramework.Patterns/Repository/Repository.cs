@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Exercise.EntityFramework.Patterns.Repository
 {
-
     public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected readonly DbContext _context;
