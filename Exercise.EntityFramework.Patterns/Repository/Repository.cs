@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Exercise.EntityFramework.Patterns.Repository
 {
+
     public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected readonly DbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
 
         public Repository(DbContext context)
         {
@@ -26,9 +28,9 @@ namespace Exercise.EntityFramework.Patterns.Repository
 
         public T FindByKey(int id) => _dbSet.Find(id);
 
-        public T Insert(T entity) => _dbSet.Add(entity);
+        public virtual T Insert(T entity) => _dbSet.Add(entity);
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;

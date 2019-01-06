@@ -6,7 +6,7 @@ using System.Text;
 namespace Exercise.EntityFramework.Examples.Model.TableName
 {
     /// <summary>
-    /// Attribute '[Table]' tells the Entity Framework to put this class to specified table.
+    /// Attribute '[Table]' tells the Entity Framework to put this class to the specified table.
     /// </summary>
     [Table("Simple")]
     public class TypeWithComplexName

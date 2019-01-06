@@ -5,7 +5,8 @@ namespace Exercise.EntityFramework.Examples._02._Context
 {
     public class SimpleContext : DbContext
     {
-        public SimpleContext() : base("SimpleContext")
+        public SimpleContext() 
+            : base("SimpleContext")
         {
 
         }
