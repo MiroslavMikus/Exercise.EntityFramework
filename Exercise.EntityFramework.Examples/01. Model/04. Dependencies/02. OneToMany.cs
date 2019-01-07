@@ -11,6 +11,8 @@ namespace Exercise.EntityFramework.Examples.Model.Dependencies
         public virtual ICollection<Order> Orders { get; set; }
 
         public string DoNotMap { get; set; }
+
+        public byte[] RowVersion { get; set; }
     }
 
     public class Order
