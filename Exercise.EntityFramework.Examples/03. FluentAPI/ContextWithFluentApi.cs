@@ -1,7 +1,7 @@
 ﻿using Exercise.EntityFramework.Examples.Model.Dependencies;
 using System.Data.Entity;
 
-namespace Exercise.EntityFramework.Examples._02._Context
+namespace Exercise.EntityFramework.Examples.FluentAPI
 {
     public class ContextWithFluentApi : DbContext
     {
