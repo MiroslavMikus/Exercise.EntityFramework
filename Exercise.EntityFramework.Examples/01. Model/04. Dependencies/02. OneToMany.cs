@@ -6,9 +6,11 @@ namespace Exercise.EntityFramework.Examples.Model.Dependencies
 {
     public class Customer
     {
-        public int Id { get; set; }
+        public int CustomerKey { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+
+        public string DoNotMap { get; set; }
     }
 
     public class Order
