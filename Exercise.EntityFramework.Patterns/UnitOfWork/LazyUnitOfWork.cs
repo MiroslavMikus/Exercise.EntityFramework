@@ -32,8 +32,6 @@ namespace Exercise.EntityFramework.Patterns.UnitOfWork
         public void Dispose()
         {
             _context.Dispose();
-
-            Users = null;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Exercise.EntityFramework.Patterns.UnitOfWork
     {
         private DbContext _context;
 
-        public IUserRepository Users { get; set; }
+        public IUserRepository Users { get; }
 
         public SimpleUnitOfWork(DbContext context, IUserRepository userRepository)
         {
@@ -33,8 +33,6 @@ namespace Exercise.EntityFramework.Patterns.UnitOfWork
         public void Dispose()
         {
             _context.Dispose();
-
-            Users = null;
         }
     }
 }
